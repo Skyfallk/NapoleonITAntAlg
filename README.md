@@ -1,7 +1,10 @@
 # NapoleonITAntAlg
 Test task.
+
 import numpy as np
+
 np.random.seed = 7
+
 #функция, обновляющая мартицу феромонов
 def TauNew(tau, ants, colony_ways, colony_l, r) :
     for i in range(0,len(m)):
