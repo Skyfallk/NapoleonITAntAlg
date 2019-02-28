@@ -6,10 +6,15 @@ import numpy as np
 np.random.seed = 7
 
 #функция, обновляющая мартицу феромонов
+
 def TauNew(tau, ants, colony_ways, colony_l, r) :
+
     for i in range(0,len(m)):
-        for j in range(0,len(m)):
+    
+            for j in range(0,len(m)):
+            
             if tau[i,j] != 0:
+            
                 tau[i,j] = (1-r)*tau[i,j]
     
     
@@ -21,26 +26,41 @@ def TauNew(tau, ants, colony_ways, colony_l, r) :
         
     return tau
 #инициализируем начальную матрицу
+
 m = np.random.randint(1,50,(20,20))
+
 for i in range(len(m)) :
+
     for j in range(len(m)) :
         if j==i :
             m[i,j] = 0
+            
 #инициализируем начальную матрицу фереомонов
+
 tau = np.random.sample((20,20))
 
 for i in range(len(tau)) :
+
     for j in range(len(tau)) :
         if j==i :
             tau[i,j] = 0
+            
 #инициализируем параметры
-a, b, q = 1, 2, 5          
+
+a, b, q = 1, 2, 5     
+
 r = 0.8
+
 way = [0]#список с исторей пройденных вершин
+
 city = [i for i in range(0, len(m))]#список всех вершин
+
 vis = list(set(city)-set(way))#список возможных вершин для перехода
+
 p = {}#словарь хранящий номер вершины и вероятность перехода в нее
+
 l = 0
+
 while len(vis)>0 :
     
     for i in vis :
@@ -62,18 +82,30 @@ while len(vis)>0 :
     vis = list(set(city)-set(way))
     p.clear()
 #первый путь
+
 best_way = way.copy()
+
 #стоимость первого пути
+
 best_l = l.copy()
+
 #количесвто муравьев
 ants = 20
+
 #список для хранения путей муравьев
+
 colony_ways = []
+
 #список стоимостей пройденных путей
+
 colony_l = []
+
 #количесвто эпох
+
 t_max = 100
-for t in range(0,t_max) :     
+
+for t in range(0,t_max) :
+
     for k in range(0,ants) :
         start = np.random.choice(len(m))
         way = [start]
@@ -114,4 +146,5 @@ for t in range(0,t_max) :
     tau = TauNew(tau, ants, colony_ways, colony_l, r)
         
 print('лучший путь', best_way)
+
 print('стоимость лучшего пути', best_l)
